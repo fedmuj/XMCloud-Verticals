@@ -19,6 +19,7 @@ interface Fields {
   Image: ImageField;
   Link: LinkField;
   Video: ImageField;
+  VideoURL: LinkField;
 }
 
 export type CarouselItemProps = {
@@ -56,7 +57,7 @@ export const Default = (props: CarouselComponentProps): JSX.Element => {
       <div className="carousel-inner">
         {props.fields.items.map((item, i) => (
           <div key={i} className={'carousel-item ' + (i == index ? 'active' : '')}>
-            {!isPageEditing && item.fields?.Video?.value?.src ? (
+            {!isPageEditing && item.fields?.VideoURL?.value?.href ? (
               <video
                 className="object-fit-cover d-block w-100 h-100"
                 key={item.id}
@@ -66,7 +67,7 @@ export const Default = (props: CarouselComponentProps): JSX.Element => {
                 playsInline
                 poster={item.fields.Image?.value?.src}
               >
-                <source src={item.fields.Video.value.src} type="video/webm" />
+                <source src={item.fields.VideoURL.value.href} type="video/webm" />
               </video>
             ) : (
               <Image
